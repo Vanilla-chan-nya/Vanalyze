@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pages="clr-namespace:Vanalyze.Pages"
         xmlns:local="clr-namespace:Vanalyze"
         ExtendsContentIntoTitleBar="True"
         mc:Ignorable="d"
@@ -19,13 +20,15 @@
             </ui:TitleBar.Icon>
         </ui:TitleBar>
 
-        <ui:NavigationView Grid.Row="1"
+        <ui:NavigationView x:Name="RootNavigation"
+                           Grid.Row="1"
                            IsBackButtonVisible="Collapsed"
                            IsPaneToggleVisible="True"
                            OpenPaneLength="150">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem Content="启动"
-                                       NavigationCacheMode="Enabled">
+                                       NavigationCacheMode="Enabled"
+                                       TargetPageType="{x:Type pages:HomePage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="Play24"/>
                     </ui:NavigationViewItem.Icon>
@@ -69,21 +72,6 @@
             
         </ui:NavigationView>
         
-        
-        
-        <StackPanel Grid.Row="1"
-                    Orientation="Vertical" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
-            <Button Content="Standard WPF button"/>
-            <ui:Button Content="WPF UI button" Icon="Accessibility20"/>
-            <ui:Button Appearance="Primary" Content="WPF UI button">
-                <ui:Button.Icon>
-                    <ui:SymbolIcon Symbol="Fluent24"/>
-                </ui:Button.Icon>
-            </ui:Button>
-        </StackPanel>
 
     </Grid>
 </ui:FluentWindow>

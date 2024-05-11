@@ -68,8 +68,5 @@ namespace Vanalyze
             return year + month + day + hour + min + sec;
         }
 
-
-
-
     }
 }
