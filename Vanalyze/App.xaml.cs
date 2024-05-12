@@ -57,6 +57,13 @@ namespace Vanalyze
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                services.AddSingleton<ClassifyPage>();
+                services.AddSingleton<ClassifyPageViewModel>();
+
+                services.AddSingleton<StartPage>();
+                services.AddSingleton<StartPageViewModel>();
+
             }).Build();
 
         /// <summary>

@@ -26,19 +26,19 @@ namespace Vanalyze.ViewModels.Windows
             {
                 Content = "分类",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Tag24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
+                TargetPageType = typeof(Views.Pages.ClassifyPage)
             },
             new NavigationViewItem()
             {
                 Content = "统计分析",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataArea24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
+                TargetPageType = typeof(Views.Pages.DashboardPage)
             },
             new NavigationViewItem()
             {
                 Content = "状态",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataUsage24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
+                TargetPageType = typeof(Views.Pages.StartPage)
             }
         };
 
