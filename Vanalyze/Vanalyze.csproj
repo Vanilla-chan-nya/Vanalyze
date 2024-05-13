@@ -22,6 +22,9 @@
 
   <ItemGroup>
     <None Remove="Assets\neko_01.png" />
+    <None Remove="Assets\Noir-transparent.png" />
+    <None Remove="Assets\Noir.ico" />
+    <None Remove="Assets\Noir.png" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
@@ -30,6 +33,8 @@
     <Resource Include="Assets\neko_01.png">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Noir-transparent.png" />
+    <Resource Include="Assets\Noir.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
