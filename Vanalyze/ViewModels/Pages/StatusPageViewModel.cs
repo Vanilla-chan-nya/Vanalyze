@@ -5,6 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace Vanalyze.ViewModels.Pages
 {
@@ -16,10 +17,16 @@ namespace Vanalyze.ViewModels.Pages
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+
         private DispatcherTimer _timer;
 
         [ObservableProperty]
         private string _activeWindowTitle;
+
+        [ObservableProperty]
+        private string _activeProcessName;
 
         public StatusPageViewModel()
         {
@@ -30,20 +37,28 @@ namespace Vanalyze.ViewModels.Pages
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            ActiveWindowTitle = GetActiveWindowTitle();
+            IntPtr handle = GetForegroundWindow();
+            ActiveWindowTitle = GetActiveWindowTitle(handle);
+            ActiveProcessName = GetActiveProcessName(handle);
         }
 
-        private string GetActiveWindowTitle()
+        private string GetActiveWindowTitle(IntPtr handle)
         {
             const int nChars = 256;
             StringBuilder Buff = new StringBuilder(nChars);
-            IntPtr handle = GetForegroundWindow();
-
             if (GetWindowText(handle, Buff, nChars) > 0)
             {
                 return Buff.ToString();
             }
             return "No active window";
+        }
+
+        private string GetActiveProcessName(IntPtr handle)
+        {
+            uint processId;
+            GetWindowThreadProcessId(handle, out processId);
+            Process process = Process.GetProcessById((int)processId);
+            return process.MainModule.FileName;
         }
     }
 }

@@ -17,8 +17,11 @@
     mc:Ignorable="d">
 
     <StackPanel Margin="20,10,20,10">
-        <TextBlock Text="{Binding ActiveWindowTitle, Mode=OneWay}" 
+        <TextBlock Text="{Binding ViewModel.ActiveWindowTitle, Mode=OneWay}" 
                    FontSize="24" 
                    Margin="0,10,0,10" />
+        <TextBlock Text="{Binding ViewModel.ActiveProcessName, Mode=OneWay}" 
+           FontSize="24" 
+           Margin="0,10,0,10" />
     </StackPanel>
 </Page>
