@@ -67,6 +67,9 @@ namespace Vanalyze
                 services.AddSingleton<StatusPage>();
                 services.AddSingleton<StatusPageViewModel>();
 
+                // Register ActivateWindowRecordService as a singleton
+                services.AddSingleton<ActivateWindowRecordService>();
+
             }).Build();
 
         /// <summary>

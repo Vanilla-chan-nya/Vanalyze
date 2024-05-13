@@ -6,21 +6,14 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Threading;
 using System.Diagnostics;
+using Vanalyze.Services;
 
 namespace Vanalyze.ViewModels.Pages
 {
     public partial class StatusPageViewModel : ObservableObject
     {
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
-
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
+        private readonly ActivateWindowRecordService _activateWindowRecordService;
 
         [ObservableProperty]
         private string _activeWindowTitle;
@@ -30,6 +23,10 @@ namespace Vanalyze.ViewModels.Pages
 
         public StatusPageViewModel()
         {
+            // Get the singleton instance of the service
+            _activateWindowRecordService = ActivateWindowRecordService.Instance;
+
+            // Setup a timer to refresh the UI
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += Timer_Tick;
             _timer.Start();
@@ -37,28 +34,19 @@ namespace Vanalyze.ViewModels.Pages
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            IntPtr handle = GetForegroundWindow();
-            ActiveWindowTitle = GetActiveWindowTitle(handle);
-            ActiveProcessName = GetActiveProcessName(handle);
-        }
+            // Get the latest record, if available
+            var latestRecord = _activateWindowRecordService.Records.LastOrDefault();
 
-        private string GetActiveWindowTitle(IntPtr handle)
-        {
-            const int nChars = 256;
-            StringBuilder Buff = new StringBuilder(nChars);
-            if (GetWindowText(handle, Buff, nChars) > 0)
+            if (!string.IsNullOrEmpty(latestRecord.WindowTitle) || !string.IsNullOrEmpty(latestRecord.ProcessName))
             {
-                return Buff.ToString();
+                ActiveWindowTitle = latestRecord.WindowTitle;
+                ActiveProcessName = latestRecord.ProcessName;
             }
-            return "No active window";
-        }
-
-        private string GetActiveProcessName(IntPtr handle)
-        {
-            uint processId;
-            GetWindowThreadProcessId(handle, out processId);
-            Process process = Process.GetProcessById((int)processId);
-            return process.MainModule.FileName;
+            else
+            {
+                ActiveWindowTitle = "No active window";
+                ActiveProcessName = "No active process";
+            }
         }
     }
 }
