@@ -64,6 +64,9 @@ namespace Vanalyze
                 services.AddSingleton<StartPage>();
                 services.AddSingleton<StartPageViewModel>();
 
+                services.AddSingleton<StatusPage>();
+                services.AddSingleton<StatusPageViewModel>();
+
             }).Build();
 
         /// <summary>

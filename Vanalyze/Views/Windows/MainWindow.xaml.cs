@@ -7,6 +7,7 @@ using Vanalyze.ViewModels.Windows;
 using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
+using System.Windows.Threading;
 
 namespace Vanalyze.Views.Windows
 {
@@ -29,7 +30,10 @@ namespace Vanalyze.Views.Windows
             SetPageService(pageService);
 
             navigationService.SetNavigationControl(RootNavigation);
+
+
         }
+        
 
         #region INavigationWindow methods
 

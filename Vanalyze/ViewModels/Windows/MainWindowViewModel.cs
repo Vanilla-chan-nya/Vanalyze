@@ -38,7 +38,7 @@ namespace Vanalyze.ViewModels.Windows
             {
                 Content = "状态",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataUsage24 },
-                TargetPageType = typeof(Views.Pages.StartPage)
+                TargetPageType = typeof(Views.Pages.StatusPage)
             }
         };
 
