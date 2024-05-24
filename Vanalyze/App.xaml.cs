@@ -89,6 +89,7 @@ namespace Vanalyze
         private void OnStartup(object sender, StartupEventArgs e)
         {
             _host.Start();
+            var activateWindowRecordService = ActivateWindowRecordService.Instance;//程序启动时就开始记录
         }
 
         /// <summary>
