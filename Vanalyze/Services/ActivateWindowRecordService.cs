@@ -89,7 +89,7 @@ namespace Vanalyze.Services
             try
             {
                 string timestamp = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-                string line = $"{timestamp} {record.ProcessName}";
+                string line = $"{timestamp}|{record.ProcessName}|{record.WindowTitle}";
 
                 // 使用 FileStream 以独占方式打开文件
                 using (var fs = new FileStream(FilePath, FileMode.Append, FileAccess.Write, FileShare.Read))
